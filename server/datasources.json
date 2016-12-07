@@ -1,0 +1,26 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "dani": {
+    "host": "ds119748.mlab.com",
+    "port": 19748,
+    "url": "mongodb://testing:123456@ds119748.mlab.com:19748/testing-loopback",
+    "database": "testing-loopback",
+    "password": "123456",
+    "name": "dani",
+    "user": "testing",
+    "connector": "mongodb"
+  },
+  "local": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "mongodb://localhost:27017/aurelia-blog",
+    "database": "aurelia-blog",
+    "password": "aurelia",
+    "name": "local",
+    "user": "aurelia",
+    "connector": "mongodb"
+  }
+}
