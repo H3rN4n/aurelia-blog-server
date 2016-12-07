@@ -9,3 +9,7 @@ npm install
 ```shell
 npm start
 ```
+
+```shell
+http://localhost:3000/explorer
+```
