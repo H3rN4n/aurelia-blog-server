@@ -1,0 +1,21 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory",
+    "file": "db.json"
+  },
+  "transient": {
+    "name": "transient",
+    "connector": "transient"
+  },
+  "local": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "mongodb://localhost:27017/aurelia-blog",
+    "database": "aurelia-blog",
+    "password": "aurelia",
+    "name": "local",
+    "user": "aurelia",
+    "connector": "mongodb"
+  }
+}

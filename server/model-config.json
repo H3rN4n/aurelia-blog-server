@@ -1,0 +1,101 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models",
+      "../node_modules/loopback-component-passport/lib/models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "local",
+    "public": false
+  },
+  "accessToken": {
+    "dataSource": "local",
+    "public": true
+  },
+  "userCredential": {
+    "dataSource": "local",
+    "public": true
+  },
+  "userIdentity": {
+    "dataSource": "local",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "local",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "local",
+    "public": true
+  },
+  "Role": {
+    "dataSource": "local",
+    "public": true
+  },
+  "AppModel": {
+    "dataSource": "local",
+    "public": false
+  },
+  "Page": {
+    "dataSource": "local",
+    "public": true
+  },
+  "Note": {
+    "dataSource": "local",
+    "public": true
+  },
+  "Post": {
+    "dataSource": "local",
+    "public": true
+  },
+  "Setting": {
+    "dataSource": "local",
+    "public": true
+  },
+  "Product": {
+    "dataSource": "local",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "local",
+    "public": true
+  },
+  "Event": {
+    "dataSource": "local",
+    "public": true
+  },
+  "AuthProvider": {
+    "dataSource": "local",
+    "public": true
+  },
+  "user": {
+    "dataSource": "local",
+    "public": true
+  },
+  "team": {
+    "dataSource": "local",
+    "public": true
+  },
+  "project": {
+    "dataSource": "local",
+    "public": true
+  },
+  "group": {
+    "dataSource": "local",
+    "public": true
+  },
+  "Meta": {
+    "dataSource": "local",
+    "public": true
+  }
+}
