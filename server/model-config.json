@@ -97,5 +97,9 @@
   "Meta": {
     "dataSource": "local",
     "public": true
+  },
+  "UsersGroupsMapping": {
+    "dataSource": "local",
+    "public": true
   }
 }

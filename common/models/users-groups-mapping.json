@@ -1,28 +1,22 @@
 {
-  "name": "group",
-  "plural": "groups",
+  "name": "UsersGroupsMapping",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
+    "userId": {
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "string"
+    "groupId": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
-  "relations": {
-    "users": {
-      "type": "hasMany",
-      "model": "UsersGroupsMapping",
-      "foreignKey": "groupId"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

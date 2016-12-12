@@ -33,8 +33,8 @@
     },
     "groups": {
       "type": "hasMany",
-      "model": "Post",
-      "foreignKey": ""
+      "model": "UsersGroupsMapping",
+      "foreignKey": "userId"
     }
   },
   "acls": [
