@@ -18,10 +18,12 @@
   "validations": [],
   "relations": {
     "users": {
-      "type": "hasMany",
+      "type": "embedsMany",
       "model": "user",
-      "foreignKey": "",
-      "through": ""
+      "property": "users",
+      "options": {
+        "validate": true,
+        "forceId": false
     }
   },
   "acls": [],
