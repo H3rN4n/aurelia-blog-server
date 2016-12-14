@@ -1,25 +1,33 @@
 'use strict';
 
-module.exports = function(Group) {
+module.exports = function (Group) {
 
-//   Group.observe('loaded', function setDefaultUsername(ctx, next) {
-//     if (ctx.instance) {
-//       console.log(ctx.instance.users);
-//       var groupUsers = ctx.instance.users ? ctx.instance.users() : [];
-      
-//         for (var i = 0; i < groupUsers.length; i++) {
-//           var userId = groupUsers[i].userId;
-//           console.log(userId);
-//           ctx.Model.app.modules.user.findById(userId, function(err, user) {
-//             if (err) {
-//               return next(err);
-//             }
-//             ctx.instance.usersPopulated = Object.assign({}, groupUsers[i], user);
-//           });
-//         }
-      
-//     }
-//     next();
-//   });
+    Group.observe('loaded', function setDefaultUsername(ctx, next) {
+        if (!ctx.instance) {
+            next();
+            return;
+        }
+        var promise = new Promise(function (res, rej) {
+            var groupUsers = ctx.instance.users ? ctx.instance.users() : [];
+            var query = { where: { or: [] } };
+            if (!groupUsers || !groupUsers.length) res();
+
+            groupUsers.forEach(function (user) {
+                query.where.or.push({ id: user.userId });
+            });
+
+            ctx.Model.app.models.user.find(query, function (err, users) {
+                groupUsers.forEach(function (groupUser) {
+                    users.forEach(function (user) {
+                        if(groupUser.userId && user.id && groupUser.userId.id === user.id.id){
+                            Object.assign(groupUser, user);
+                        }
+                    });
+                });
+                res();
+            });
+        });
+        promise.then(next);
+    });
 
 };
