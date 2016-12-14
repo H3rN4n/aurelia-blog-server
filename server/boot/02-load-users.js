@@ -3,7 +3,7 @@
 // to enable these logs set `DEBUG=boot:02-load-users` or `DEBUG=boot:*`
 var log = require('debug')('boot:02-load-users');
 
-module.exports = function(app) {
+module.exports = function (app) {
 
   if (app.dataSources.db.name !== 'Memory' && !process.env.INITDB) {
     return;
@@ -40,40 +40,48 @@ module.exports = function(app) {
       }]
     }];
 
-    roles.forEach(function(role) {
-      Role.findOrCreate(
-        {where: {name: role.name}}, // find
-        {name: role.name}, // create
-        function(err, createdRole, created) {
-          if (err) {
-            console.error('error running findOrCreate('+role.name+')', err);
-          }
-          (created) ? log('created role', createdRole.name)
-                    : log('found role', createdRole.name);
-          role.users.forEach(function(roleUser) {
-            User.findOrCreate(
-              {where: {username: roleUser.username}}, // find
-              roleUser, // create
-              function(err, createdUser, created) {
-                if (err) {
-                  console.error('error creating roleUser', err);
-                }
-                (created) ? log('created user', createdUser.username)
-                          : log('found user', createdUser.username);
-                createdRole.principals.create({
-                  principalType: RoleMapping.USER,
-                  principalId: createdUser.id
-                }, function(err, rolePrincipal) {
+    Role.count().then(initRoles);
+
+    function initRoles(count) {
+      if(count) return;
+
+      roles.forEach(function (role) {
+        Role.findOrCreate(
+          { where: { name: role.name } }, // find
+          { name: role.name }, // create
+          function (err, createdRole, created) {
+            if (err) {
+              console.error('error running findOrCreate(' + role.name + ')', err);
+            }
+            (created) ? log('created role', createdRole.name)
+              : log('found role', createdRole.name);
+            role.users.forEach(function (roleUser) {
+              User.findOrCreate(
+                { where: { username: roleUser.username } }, // find
+                roleUser, // create
+                function (err, createdUser, created) {
                   if (err) {
-                    console.error('error creating rolePrincipal', err);
+                    console.error('error creating roleUser', err);
                   }
-                  users.push(createdUser);
+                  (created) ? log('created user', createdUser.username)
+                    : log('found user', createdUser.username);
+                  createdRole.principals.create({
+                    principalType: RoleMapping.USER,
+                    principalId: createdUser.id
+                  }, function (err, rolePrincipal) {
+                    if (err) {
+                      console.error('error creating rolePrincipal', err);
+                    }
+                    users.push(createdUser);
+                  });
                 });
-              });
+            });
           });
-        });
-    });
-    return users;
+      });
+      return users;
+    }
   }
+
+
 
 };
